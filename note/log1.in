@@ -1,0 +1,47 @@
+■Djangoの導入
+１．Djangoフォルダの中に入り，以下のコマンド実行
+　python3 -m venv venv
+２．以下コマンドで仮想環境有効化
+  source venv/bin/activate
+３．以下コマンドでプロジェクト作成
+  django-admin startproject blogproject
+４．prjフォルダ移動し，以下コマンドで，アプリ作成
+  python3 manage.py startapp blogapp
+５．blogproject/settings.pyを開く．INSTALLED_APPSに以下を追記
+  'blogapp.apps.BlogappConfig'
+６．同じファイルの中の，使用言語とタイムゾーンを日本語に変更
+  LANGUAGE_CODE = 'ja'
+  TIME_ZONE     = 'Asia/Tokyo'
+７．prjのURLConfに，appのURLConfにリダイレクトするよう設定
+prjのurls.pyについて，以下のように編集
+以下のインクルードを追加し，urlpatternsを編集
+--------
+from django.urls import path, include
+
+ urlpatterns = [
+  省略,
+  path('', include('blogapp.urls')),
+]
+--------
+８．appにurls.pyを作成し，以下を記述
+----------
+from django.urls import path
+from . import views
+
+app_name = 'blogapp'
+
+urlpatterns = [
+    path('', views.index_view, name='index')
+]
+----------
+９．appのviews.pyに以下を記載
+---------
+from django.shortcuts import render
+
+def index_view(request):
+    return render(request, 'index.html')
+--------
+１０．app内にstaticフォルダを作成し，css，js，assets等を入れる．
+１１．app内にtemplatesフォルダを作成し，index.htmlを入れる
+
+
