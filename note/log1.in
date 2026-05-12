@@ -42,6 +42,5 @@ def index_view(request):
     return render(request, 'index.html')
 --------
 １０．app内にstaticフォルダを作成し，css，js，assets等を入れる．
-１１．app内にtemplatesフォルダを作成し，index.htmlを入れる
-
+１１．app内にtemplatesフォルダを作成し，ind
 
