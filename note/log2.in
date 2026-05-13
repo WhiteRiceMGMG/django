@@ -1,13 +1,20 @@
 ■PC間で開発を共有する方法
 １．プロジェクトの一番上に行く．
+
 ２．venv状態で，以下のコマンドを入力
   pip freeze > requirements.txt
+
 ３． .gitignoreファイルを作成し，「/venv」と入力
+
 ４．あとは普通にpushする．
+
 ５．他PCでクローンする
+
 ６．そのPCでvenvを作る．
+
 ７．venvを有効化．winなら，
 　.\venv\Scripts\Activate.ps1
+
 ８．一括インストールをする
  pip install -r requirements.txt
  番外編
@@ -16,5 +23,13 @@
  クローン直後は空っぽのため，python manage.py migrateを叩いて
  新しいデータベースを作成する．
 
+９．モデルを作成する．詳細はappのmodels.py参照
 
+１０．モデルを作成したら，まずマイグレーションファイルを作成
+    python3 manage.py makemigrations アプリ名
+
+１１．マイグレーションファイルを事項氏，データベースの更新
+    python3 manage.py migrate
+
+１２．app内のadmin.py内を編集．詳細はファイルを直接参照
 
