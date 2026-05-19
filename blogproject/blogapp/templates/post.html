@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Django's Blog{% endblock %}
+
+
+
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <!-- 
+                            投稿記事のタイトル
+                            <h1>タグの要素を書き換える
+                            レコードをobjectで参照し，titleフィールドの値を出力
+                            -->
+                            <h1>{{object.title}}</h1>
+                            <!--
+                            サブタイトル
+                            <h2>タグの要素を書き換える
+                            レコードをobjectで参照し，
+                            contentフィールドの値を30文字以内で出力
+                            -->
+                            <h2 calss="subheading">
+                                {{object.content|truncatechars:30}}</h2>
+                            <span class="meta">
+                                <!-- 投稿日時とカテゴリ -->
+                                <!-- トップページにリンクする -->
+                                <a href={% url 'blogapp:index' %}>
+                                    Django's Blog</a>
+                                <!--投稿日時としてposted_atフィールドを出力-->
+                                {{object.posted_at}}に投稿/カテゴリ:
+                                <!-- categoryフィールドを出力 -->
+                                {{object.category}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!--
+                    レコードをobjectで参照し，contentフィールドの値を出力
+                    -->
+                    <p>{{object.content}}</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- 水平線を追加 -->
+        <hr>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
