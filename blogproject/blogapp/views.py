@@ -1,32 +1,42 @@
 from django.shortcuts import render
 
+#paginatorをインポート
+from django.core.paginator import Paginator
+
 #モデルからBlogPostをインポート
 from .models import BlogPost
 
 
 def index_view(request):
-    '''
-    トップページのビュー
-    テンプレートをレンダリングして戻り値として返す
-    Parameters:
-        request(HTTPRequest):
-            クライアントからのリクエスト情報を格納した
-            HTTPRequestオブジェクト
-    Return(HTTPRequest):
-        render()でテンプレートをレンダリングした結果
-    モデルBloPostのオ
-    ブジェクトにorder_by()を適用して，
-    BlogPostのレコードを投稿日時の降順で並び替える
-    '''
+    #トップページのビュー
+    #テンプレートをレンダリングして戻り値として返す
+    #Parameters:
+    #    request(HTTPRequest):
+    #        クライアントからのリクエスト情報を格納した
+    #        HTTPRequestオブジェクト
+    #Return(HTTPRequest):
+    #    render()でテンプレートをレンダリングした結果
+    #モデルBloPostのオ
+    #ブジェクトにorder_by()を適用して，
+    #BlogPostのレコードを投稿日時の降順で並び替える
 
     records = BlogPost.objects.order_by('-posted_at')
-    '''
-    render():
-    第一引数:HTTPRequestオブジェクト
-    第二引数:レンダリングするテンプレート
-  　第三引数:テンプレートに引き渡すdict型のデータ
-             {任意のキー:クエリの結果(レコードのリスト)}
-    '''
+
+    paginator = Paginator(records,4)
+    #getリクエストのURLにpageパラメータがある場合はその値を取得する．
+    #pageパラメータがない場合はデフォルトで1を返すようにする．
+
+    page_number = request.GET.get('page',1)
+    #page()メソッドの引数にページ番号を取得し，
+    #該当ページのレコードを取得する．
+
+    page = paginator.page(page_number)
+
+    #render():
+    #第一引数:HTTPRequestオブジェクト
+    #第二引数:レンダリングするテンプレート
+  　#第三引数:テンプレートに引き渡すdict型のデータ
+    #         {任意のキー:クエリの結果(レコードのリスト)}
 
     return render(request, 'index.html', {'orderby_records': records})
 
