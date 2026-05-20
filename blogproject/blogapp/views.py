@@ -35,7 +35,7 @@ def index_view(request):
     #render():
     #第一引数:HTTPRequestオブジェクト
     #第二引数:レンダリングするテンプレート
-  　#第三引数:テンプレートに引き渡すdict型のデータ
+    #第三引数:テンプレートに引き渡すdict型のデータ
     #         {任意のキー:クエリの結果(レコードのリスト)}
 
     return render(request, 'index.html', {'orderby_records': records})
