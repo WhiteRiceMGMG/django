@@ -26,7 +26,7 @@ urlpatterns = [
     path(
         'dailylife-list/',
         views.dailylife_view,
-        name='dialylife_list'
+        name='dailylife_list'
         ),
 
     path(

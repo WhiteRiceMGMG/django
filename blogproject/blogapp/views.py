@@ -30,7 +30,7 @@ def index_view(request):
     #page()メソッドの引数にページ番号を取得し，
     #該当ページのレコードを取得する．
 
-    page = paginator.page(page_number)
+    pages = paginator.page(page_number)
 
     #render():
     #第一引数:HTTPRequestオブジェクト
@@ -38,7 +38,7 @@ def index_view(request):
     #第三引数:テンプレートに引き渡すdict型のデータ
     #         {任意のキー:クエリの結果(レコードのリスト)}
 
-    return render(request, 'index.html', {'orderby_records': records})
+    return render(request, 'index.html', {'orderby_records': pages})
 
 def blog_detail(request, pk):
     '''
@@ -58,13 +58,15 @@ def science_view(request):
 def dailylife_view(request):
     records = BlogPost.objects.filter(category='dailylife').order_by('-posted_at')
     paginator = Paginator(records, 2)
-    page_number = request.GET.get('page', 2)
+    page_number = request.GET.get('page',1)
+    pages = paginator.page(page_number)
     return render(request, 'dailylife_list.html', {'orderby_records':pages})
 
 def music_view(request):
     records = BlogPost.objects.filter(category='music').order_by('-posted_at')
     paginator = Paginator(records, 2)
-    page_number = request.GET.get('page', 2)
+    page_number = request.GET.get('page', 1)
+    pages = paginator.page(page_number)
     return render(request, 'dailylife_list.html', {'orderby_records':pages})
 
 
