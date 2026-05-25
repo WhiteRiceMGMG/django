@@ -47,3 +47,24 @@ def blog_detail(request, pk):
     record = BlogPost.objects.get(id=pk)
     return render(
         request, 'post.html', {'object': record})
+
+def science_view(request):
+    records = BlogPost.objects.filter(category='science').order_by('-posted_at')
+    paginator = Paginator(records, 2)
+    page_number = request.GET.get('page', 1)
+    pages = paginator.page(page_number)
+    return render(request, 'science_list.html', {'orderby_records': pages})
+
+def dailylife_view(request):
+    records = BlogPost.objects.filter(category='dailylife').order_by('-posted_at')
+    paginator = Paginator(records, 2)
+    page_number = request.GET.get('page', 2)
+    return render(request, 'dailylife_list.html', {'orderby_records':pages})
+
+def music_view(request):
+    records = BlogPost.objects.filter(category='music').order_by('-posted_at')
+    paginator = Paginator(records, 2)
+    page_number = request.GET.get('page', 2)
+    return render(request, 'dailylife_list.html', {'orderby_records':pages})
+
+
